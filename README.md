@@ -1,1 +1,1 @@
-# front-doc
+1. [JavaScript](/javascript/js.md)
