@@ -209,14 +209,92 @@ const message = `You can ${age < 21 ? 'not' : ''} view this page`
 - `map.clear()` – очищает коллекцию от всех элементов.
 - `map.size` – возвращает текущее количество элементов.
 
-## Как определить наличие свойства в объекте?
+## Объекты
+Объекты – ссылочный тип данных. То есть переменные и константы хранят не сами объекты (их данные), а ссылку на них.
 
+### spread оператор
+Поверхностное копирование (clone) и слияние (merge) 
+можно объединить в одну операцию. 
+Это позволяет "обновлять" объекты в функциональном стиле, 
+другими словами мы создаем новые 
+объекты на основе старых, вместо их обновления.
 ```javascript
-const obj = {
-    a: 5,
-    b: "str"
-}
-obj.hasOwnProperty("a"); // first method
-"b" in obj // second method
+// Поверхностное копирование
+const user = { name: 'Vasya', married: true, age: 25 };
+const user2 = { name: 'Irina', surname: 'Petrova' };
+
+const mergedObject = { ...user, ...user2 };
+// Object.assign({}, user, user2);
 ```
 
+### rest оператор
+С его помощью во время деструктуризации можно собрать все "оставшиеся" свойства в один объект
+```javascript
+const user = { name: 'Tirion', email: 'support@hexlet.io', age: 44 };
+const { name, ...rest } = user;
+console.log(rest);
+// => { email: 'support@hexlet.io', age: 44 }
+```
+
+### Деструктуризация
+```javascript
+const person = { firstName: 'Rasmus', lastName: 'Lerdorf', manager: true };
+const { firstName, manager } = person;
+console.log(firstName); // => 'Rasmus'
+console.log(manager); // => true
+
+//При деструктуризации можно переименовывать имена. 
+// Такое бывает нужно, если подобная 
+// константа уже определена выше.
+const person = { firstName: 'Rasmus', lastName: 'Lerdorf', manager: true };
+const { manager: isManager } = person;
+console.log(isManager); // => true
+// В случае отсутствия свойств в объекте, 
+// деструктуризация позволяет задавать 
+// значения по умолчанию для таких свойств:
+const person = { firstName: 'Rasmus', lastName: 'Lerdorf' };
+console.log(person.manager); // undefined
+const { manager = false } = person;
+console.log(manager); // => false
+//Деструктуризация может быть вложенной.
+const { links, attributes: user, relationships: { author } } = response.data;
+```
+
+### Ключи и значения 
+
+```javascript
+// получаем массив ключей
+const course = { name: 'JS: React', slug: 'js-react' };
+const keys = Object.keys(course); // [ 'name', 'slug' ]
+// получаем массив значений
+const course = { name: 'JS: React', slug: 'js-react' };
+const values = Object.values(course); // [ 'JS: React', 'js-react' ]
+// Ну, и последний вариант, метод, который возвращает сразу ключи и значения объекта
+const course = { name: 'JS: React', slug: 'js-react' };
+const entries = Object.entries(course); // [[ 'name', 'JS: React' ], [ 'slug', 'js-react' ]]  
+```
+
+### Деструктуризация и обход
+```javascript
+for (const [key, value] of entries) {
+  console.log(key);
+  console.log(value);
+}
+```
+
+## Массивы 
+Массив внутри – это тоже объект: 
+```javascript
+typeof []; // 'object'
+```
+Проектируя функции, работающие с массивами, 
+есть два пути: менять исходный массив 
+или формировать внутри 
+новый и возвращать его наружу. 
+Какой лучше? В подавляющем большинстве 
+стоит предпочитать второй. 
+
+**Агрегацией** называются любые вычисления,
+которые, как правило, строятся на основ
+е всего набора данных, например, поиск 
+максимального, среднего, суммы и так далее. 
