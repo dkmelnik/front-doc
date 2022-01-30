@@ -298,3 +298,39 @@ typeof []; // 'object'
 которые, как правило, строятся на основ
 е всего набора данных, например, поиск 
 максимального, среднего, суммы и так далее. 
+
+### rest оператор
+Rest-оператор позволяет "свернуть" 
+часть элементов во время деструктуризации. 
+Например с его помощью можно разложить
+массив на первый, второй элементы и все остальные:
+```javascript
+const [first, second, ...rest] = 'some string';
+console.log(first); // => 's'
+console.log(second); // => 'o'
+console.log(rest); // => [ 'm', 'e', ' ', 's', 't', 'r', 'i', 'n', 'g' ]
+```
+
+### spread оператор
+
+С его помощью обычно копируют или сливают массивы.
+Spread-оператор нередко используется 
+для копирования массива. Копирование 
+предотвращает изменение исходного массива, 
+в том случае, когда необходимо менять его копию
+```javascript
+const russianCities = ['moscow', 'kazan'];
+const copy = [...russianCities];
+```
+
+### деструктуризация
+
+```javascript
+const [firstElement, 
+  secondElement, 
+  thirdElement = 3] = [1, 2];
+
+console.log(firstElement);  // => 1
+console.log(secondElement); // => 2
+console.log(thirdElement);  // => 3
+```
