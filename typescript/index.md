@@ -55,3 +55,122 @@ interface Test2 extends Test{
 ```typescript
 type stringOrNumber = string | number
 ```
+
+## Литеральные типы
+Литеральные типы полезны, когда мы хотим ограничить область
+значения переменной
+```typescript
+type CardinalDirection = 'Up' | 'Down';
+function move(distance: number, direction: CardinalDirection): -1 | 1 | 0 {
+    switch (direction) {
+        case "Up":
+            return -1
+        case "Down":
+            return 1
+        default:
+            return 0
+    }
+}
+```
+## Enums
+
+Зачем нужен Enums?
+
+Константа в ООП доступна только в пределах класса. 
+Что если я хочу хранить список цветов и использовать 
+их при отрисовке фигур во всем моем проекте? 
+Можем создать отдельный класс для списка цветов, 
+только чтобы хранить там варианты, и затем использовать 
+параметры этого типа во всех методах
+отрисовки фигур - уже неплохо, мы добилить 
+типизации, так?... но нам не нужен ЦЕЛЫЙ класс 
+для этого...никакое состояние мы там не храним, 
+поведение не определяем...для этого и придумали enum.
+```typescript
+enum Colors {
+  White,
+  Black
+}
+
+class Rectangle {
+  DrawUsingEnum(color: Colors){
+    switch(color){
+      case Colors.White: {
+        //..draw white rect
+      } 
+      case Colors.Black: {
+        //..draw black rect
+      }       
+    }
+  }
+
+  DrawUsingNumber(color: number){
+    switch(color){
+      case 1: { //let say you draw the WHITE one when you passed 1
+        //..draw white
+      }
+      case 2: { //it's for black
+        //..draw BLACK one
+      }
+    }
+  }
+
+  DrawUsingString(color: string) {
+    switch(color){
+      case "white": {
+        //...draw white rect
+      }
+      case "black": {
+        //...draw black rect
+      }
+    }
+  }
+}
+
+class Program{
+  Main() {
+    var rect1 = new Rectangle();
+    rect1.DrawUsingEnum(Colors.White) // pass enum as a parameter. No WAY to pass smth else like Colors.Red
+
+    rect1.DrawUsingNumber(999) // what happens here??? we handle only 1 & 2
+    rect1.DrawUsingString("red") // again we do not have case for "red"
+  }
+}
+```
+
+## Tuple
+
+Кортеж (tuple) упорядоченный набор фиксированной длины.
+Кортеж, как структура данных, примечателен тем,
+что в него нельзя добавлять элементы, 
+а так же нельзя менять
+местами элементы и нарушать порядок следования.
+
+```typescript
+const a: [number, string, number] = [1, "2", 3]
+```
+
+## Generics
+Дженерики — это возможность создавать компоненты, 
+работающие не только с одним, 
+а с несколькими типами данных
+
+Дженерики и типы соотносятся друг с другом, 
+как значения и аргументы функции. 
+Это такой способ 
+сообщить компонентам 
+(функциям, классам или интерфейсам), какой 
+тип необходимо использовать при их вызове так же, 
+как во время вызова мы сообщаем функции, 
+какие значения использовать в качестве аргументов.
+```typescript
+function identity <T>(value: T) : T {
+    return value;
+}
+console.log(identity<Number>(1)) 
+console.log(identity<String>("test")) 
+```
+
+
+
+
