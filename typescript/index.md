@@ -171,6 +171,37 @@ console.log(identity<Number>(1))
 console.log(identity<String>("test")) 
 ```
 
+## JSX
+
+Расширение файлов: jsx, tsx.
+
+В конфиге:
+```json
+{
+  "jsx": "react"
+}
+```
+Устанавливаем библиотеку, которая даст нам типизацию
+```shell
+npm i react
+npm i -D @types/react
+
+```
+Аналогичное создание компонентов
+```tsx
+const a: JSX.Element = <div tabIndex={0}> Test </div>;
+const b: JSX.Element = React.createElement("div", {tabIndex:1}, 'Test');
+
+// компилирутеся в
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+exports.__esModule = true;
+var react_1 = __importDefault(require("react"));
+var a = react_1["default"].createElement("div", { tabIndex: 0 }, " Test ");
+var b = react_1["default"].createElement("div", { tabIndex: 1 }, 'Test');
+```
 
 
 
