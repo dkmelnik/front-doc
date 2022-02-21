@@ -1,0 +1,23 @@
+{
+  "name": "front-doc",
+  "version": "1.0.0",
+  "description": "1. [JavaScript](/javascript/index.md) 2. [TypeScript](/typescript/index.md) 2. [React](/react/index.md)",
+  "main": "index.js",
+  "scripts": {
+    "md-to-pdf ./**/*.md": "md-to-pdf ./**/*.md",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyber-lama/front-doc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyber-lama/front-doc/issues"
+  },
+  "homepage": "https://github.com/cyber-lama/front-doc#readme",
+  "dependencies": {
+    "md-to-pdf": "^5.1.0"
+  }
+}
