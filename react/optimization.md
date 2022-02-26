@@ -210,8 +210,6 @@ export const IsFine = memo(({value}:{value: number}) => {
 });
 ```
 
-## useCallback 
-
 
 
 
