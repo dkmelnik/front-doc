@@ -35,8 +35,15 @@ console.log(arr2)
 console.log(arr1 === arr2) //true
 // ## 5
 
-[1,2,3].map(console.log)
+[1,2,3].map(console.log);
+1 0 [ 1, 2, 3 ]
+2 1 [ 1, 2, 3 ]
+3 2 [ 1, 2, 3 ]
+[ undefined, undefined, undefined ]
 
+Вместо того чтобы выводить только значение, каждый вызов console.log выводит индекс и массив полностью.
+При передаче функции в map() на каждой итерации она будет получать три аргумента: currentValue,
+currentIndex и полный array. Вот почему при каждой итерации выводятся три записи.
 
 // ## 6
 var v = 0;
