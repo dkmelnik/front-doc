@@ -3,7 +3,6 @@
 *COMMONJS*
 - require в любом месте
 - можно использовать в условии
-- при require загрузка всего из модуля 
 - нет асинхронной загрузки
 
 Для использования модулей в приложении мы можем:
@@ -13,7 +12,6 @@
 *ES MODULES*
 - импорт на верхнем уровне
 - импорт нельзя использовать в условии
-- выборочная загрузка при импорте, того что мы хотим импортировать
 - есть возможность асинхронной загрузки
 
 Для использования модулей в приложении мы можем:
@@ -22,8 +20,50 @@
 
 
 ## COMMONJS
+Для экспорта в CommonJS используются глобальные объекты module и exports.
+Для этого необходимо просто добавить новое поле в объект exports.
+```js
+// awesome.js
+module.exports.awesomeValue  = 42;
+module.exports.getCurrentDate = () => {
+    return new Date()
+}
+```
+```js
+// index.js
+const {awesomeValue, getCurrentDate} = require('./awesome');
 
+console.log({
+    awesomeValue,
+    getCurrentDate: getCurrentDate()
+})
+```
+Для удобства экспорта части фунциональности 
+в глобальной области существует переменная exports,
+которая является ссылкой на module.exports. 
+Поэтому возможен и такой синтаксис экспорта:
 
+```js
+// awesome.js
+exports.awesomeValue  = 42;
+exports.getCurrentDate = () => {
+    return new Date()
+}
+```
+
+Стоит обратить внимание, что если были экспортированы части модуля,
+они затрутся и будет
+экспортировано только последнее значение module.exports:
+
+```js
+exports.counter = function () { /* ... */ }  
+
+exports.awesomeValue = 42;
+
+module.exports = {};
+
+// counter и awesomeValue не будут экспортированы
+```
 ## ES MODULES
 
 ### Именованный импорт/экспорт
